@@ -18,7 +18,7 @@ onready var exit = $Exit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	respawn(self)
 	try_open_door()
 	if next_level_scene == null:
@@ -41,9 +41,9 @@ func respawn(node: Node):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("restart_game"):
-		get_tree().reload_current_scene()
+#func _process(delta):
+#	if Input.is_action_just_pressed("restart_game"):
+#		get_tree().reload_current_scene()
 
 
 func try_open_door():
