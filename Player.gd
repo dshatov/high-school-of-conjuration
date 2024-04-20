@@ -60,7 +60,7 @@ func _physics_process_impl(delta):
 
 	process_physics_input(x_input, y_input, delta)
 	
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_pressed("summon"):
 		summon_input_timestamp = now
 	
 	if (
