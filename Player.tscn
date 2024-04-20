@@ -4,7 +4,7 @@
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 7.5 )
+extents = Vector2( 4, 7 )
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.737589 )
@@ -92,7 +92,7 @@ vframes = 3
 frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, 0.5 )
+position = Vector2( 0.5, 1 )
 shape = SubResource( 1 )
 
 [node name="LightSprite" type="Sprite" parent="."]
