@@ -26,6 +26,7 @@ onready var current_summoning_area: Area2D = null
 var now = 0
 var motion = Vector2.ZERO
 var on_floor_timestamp = 0
+var summon_input_timestamp = 0
 var resync_timestamp = 0
 
 func respawn():
@@ -59,15 +60,19 @@ func _physics_process_impl(delta):
 
 	process_physics_input(x_input, y_input, delta)
 	
+	if Input.is_action_just_pressed("ui_down"):
+		summon_input_timestamp = now
 	
-	if (Input.is_action_just_pressed("ui_down") 
-		and is_on_floor()
+	if (
+		is_on_floor()
 		and current_summoning_area != null
+		and now - summon_input_timestamp < 0.1
 	):
 		print_debug("replayer_summoned")
 		motion = Vector2.ZERO
 		#now = 0 # necessary? make sense?
 		#on_floor_timestamp = 0 # necessary? make sense?
+		summon_input_timestamp = 0
 		current_summoning_area.use()
 		current_summoning_area = null
 		emit_signal("replayer_summoned", self)
