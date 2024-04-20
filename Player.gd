@@ -61,13 +61,13 @@ func _physics_process_impl(delta):
 	
 	
 	if (Input.is_action_just_pressed("ui_down") 
-		and is_on_floor() and motion.x == 0
+		and is_on_floor()
 		and current_summoning_area != null
 	):
 		print_debug("replayer_summoned")
-		now = 0
 		motion = Vector2.ZERO
-		on_floor_timestamp = 0
+		#now = 0 # necessary? make sense?
+		#on_floor_timestamp = 0 # necessary? make sense?
 		current_summoning_area.use()
 		current_summoning_area = null
 		emit_signal("replayer_summoned", self)
