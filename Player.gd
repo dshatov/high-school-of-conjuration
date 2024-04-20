@@ -8,7 +8,7 @@ signal replayer_summoned(position)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const ACCEL = 300
+const ACCEL = 280
 const MAX_SPEED_X = 120
 const MAX_SPEED_FALL = 250
 const FRICTION = 0.5
@@ -87,6 +87,9 @@ func _physics_process_impl(delta):
 
 func process_physics_input(x_input, y_input, delta):
 	
+	if x_input * motion.x <= 0:
+		motion.x = 0
+
 	if x_input != 0:
 		motion.x += x_input * ACCEL * delta
 		motion.x = clamp(motion.x, -MAX_SPEED_X, MAX_SPEED_X)
@@ -118,7 +121,7 @@ func process_physics_input(x_input, y_input, delta):
 		if abs(motion.y) < 5:
 			motion.y = 0
 
-	if abs(motion.x) < 5:
+	if abs(motion.x) < 2:
 		motion.x = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
