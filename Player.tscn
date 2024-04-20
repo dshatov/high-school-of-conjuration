@@ -4,7 +4,7 @@
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 7.5 )
+extents = Vector2( 4, 7.5 )
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.737589 )
