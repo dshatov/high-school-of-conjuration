@@ -100,7 +100,7 @@ func process_physics_input(x_input, y_input, delta):
 	motion.y += GRAVITY * delta
 	if motion.y > MAX_SPEED_FALL:
 		motion.y = MAX_SPEED_FALL
-	if is_on_floor() or now - on_floor_timestamp < 0.1 and motion.y > 0:
+	if (is_on_floor() or now - on_floor_timestamp < 0.15) and motion.y > 0:
 		if x_input == 0:
 			motion.x = lerp(motion.x, 0, FRICTION)
 		if y_input < 0:
