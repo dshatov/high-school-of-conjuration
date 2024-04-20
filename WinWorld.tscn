@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://tiles.png" type="Texture" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://WinLabel.gd" type="Script" id=4]
 [ext_resource path="res://Exit.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -278,11 +279,11 @@ position = Vector2( 7, 152 )
 
 [node name="SummoningAreas" type="Node" parent="."]
 
-[node name="Label" type="Label" parent="."]
-margin_left = 130.0
+[node name="WinLabel" type="Label" parent="."]
+margin_left = 120.0
 margin_top = 23.0
-margin_right = 207.0
-margin_bottom = 122.0
+margin_right = 216.0
+margin_bottom = 156.0
 text = "YOU pass
 summoners
 exam!
@@ -291,6 +292,7 @@ exam!
 Congrats!"
 align = 1
 valign = 1
+script = ExtResource( 4 )
 
 [connection signal="player_exit_finished" from="Player" to="." method="_on_Player_player_exit_finished"]
 [connection signal="player_kill_finished" from="Player" to="." method="_on_Player_player_kill_finished"]
