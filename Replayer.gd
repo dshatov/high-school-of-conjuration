@@ -17,6 +17,7 @@ onready var player_detector = $PlayerDetector
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	is_demon = true
 	print_debug("replayer ready")
 	input_queue.resize(inputQueueCapacity)
 	pass # Replace with function body.
@@ -26,8 +27,8 @@ func _physics_process_impl(delta):
 	pass
 
 
-func respawn():
-	pass
+#func respawn():
+#	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

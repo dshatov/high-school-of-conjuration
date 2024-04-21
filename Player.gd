@@ -26,14 +26,16 @@ onready var current_summoning_area: Area2D = null
 var now = 0
 var motion = Vector2.ZERO
 var on_floor_timestamp = 0
-var summon_input_timestamp = 0
+var summon_input_timestamp = -10000
 var resync_timestamp = 0
+var is_demon = false
 
 func respawn():
 	now = 0
 	motion = Vector2.ZERO
 	on_floor_timestamp = 0
 	resync_timestamp = 0
+	summon_input_timestamp = -10000
 	position = initial_pos
 	collision_shape.disabled = false
 	current_summoning_area = null
@@ -47,10 +49,10 @@ func _ready():
 
 
 func _physics_process(delta):
+	now += delta
 	_physics_process_impl(delta)
 
 func _physics_process_impl(delta):
-	now += delta;
 	var x_input = Input.get_axis("ui_left", "ui_right")
 	var y_input = 0
 	if Input.is_action_just_pressed("player_jump"):
@@ -69,6 +71,7 @@ func _physics_process_impl(delta):
 		and now - summon_input_timestamp < 0.1
 	):
 		print_debug("replayer_summoned")
+		$SFX/RandomOpen.play()
 		motion = Vector2.ZERO
 		#now = 0 # necessary? make sense?
 		#on_floor_timestamp = 0 # necessary? make sense?
@@ -98,7 +101,12 @@ func process_physics_input(x_input, y_input, delta):
 	else:
 		animation.play("idle")
 	
+	var was_on_floor = is_on_floor()
 	motion = move_and_slide(motion, Vector2.UP)
+	if !was_on_floor and is_on_floor():
+		$SFX/RandomFallOnGround.play()
+	elif was_on_floor and !is_on_floor() and motion.y < 0 and is_demon:
+		$SFX/RandomJump.play()
 	
 	motion.y += GRAVITY * delta
 	if motion.y > MAX_SPEED_FALL:
@@ -106,8 +114,10 @@ func process_physics_input(x_input, y_input, delta):
 	if (is_on_floor() or now - on_floor_timestamp < 0.15) and motion.y > 0:
 		if x_input == 0:
 			motion.x = lerp(motion.x, 0, FRICTION)
-		if y_input < 0:
+		if y_input < 0 and !is_demon:
 			on_floor_timestamp = 0
+			if !is_demon:
+				$SFX/RandomJump.play()
 			motion.y = -JUMP_FORCE
 	else:
 		animation.play("jump_up")
@@ -116,13 +126,16 @@ func process_physics_input(x_input, y_input, delta):
 		if x_input == 0:
 			motion.x = lerp(motion.x, 0, AIR_RESISTANCE)
 
+	if abs(motion.x) < 2:
+		motion.x = 0
+
 	if is_on_floor():
 		on_floor_timestamp = now
 		if abs(motion.y) < 5:
 			motion.y = 0
-
-	if abs(motion.x) < 2:
-		motion.x = 0
+		if motion.x != 0:
+			if !$SFX/RandomStep.playing:
+				$SFX/RandomStep.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -130,6 +143,7 @@ func process_physics_input(x_input, y_input, delta):
 
 func kill():
 	collision_shape.disabled = true
+	$SFX/Death.play()
 	# TODO timer
 	emit_signal("player_kill_finished")
 

@@ -1,7 +1,19 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Replayer.gd" type="Script" id=1]
 [ext_resource path="res://demon.png" type="Texture" id=2]
+[ext_resource path="res://sfx/fall-3.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/step-2.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/step-4.wav" type="AudioStream" id=5]
+[ext_resource path="res://sfx/jump-3.wav" type="AudioStream" id=6]
+[ext_resource path="res://sfx/fall-1.wav" type="AudioStream" id=8]
+[ext_resource path="res://sfx/jump-1.wav" type="AudioStream" id=9]
+[ext_resource path="res://sfx/jump-4.wav" type="AudioStream" id=10]
+[ext_resource path="res://sfx/fall-2.wav" type="AudioStream" id=13]
+[ext_resource path="res://sfx/step-1.wav" type="AudioStream" id=14]
+[ext_resource path="res://sfx/step-3.wav" type="AudioStream" id=15]
+[ext_resource path="res://sfx/jump-2.wav" type="AudioStream" id=16]
+[ext_resource path="res://RandomAudioStreamPlayer2D.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
@@ -116,5 +128,23 @@ anims/RESET = SubResource( 8 )
 anims/idle = SubResource( 9 )
 anims/jump_up = SubResource( 10 )
 anims/run = SubResource( 11 )
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="RandomJump" parent="SFX" instance=ExtResource( 19 )]
+pitch_scale = 1.48
+max_distance = 150.0
+streams = [ ExtResource( 9 ), ExtResource( 16 ), ExtResource( 6 ), ExtResource( 10 ) ]
+
+[node name="RandomFallOnGround" parent="SFX" instance=ExtResource( 19 )]
+pitch_scale = 1.48
+max_distance = 150.0
+streams = [ ExtResource( 8 ), ExtResource( 13 ), ExtResource( 3 ) ]
+
+[node name="RandomStep" parent="SFX" instance=ExtResource( 19 )]
+pitch_scale = 1.48
+max_distance = 150.0
+streams = [ ExtResource( 14 ), ExtResource( 4 ), ExtResource( 15 ), ExtResource( 5 ) ]
+throttling_sec = 0.6
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
