@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://LeaderBoard.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="LeaderBoard" type="ColorRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 320.0
+margin_bottom = 184.0
+color = Color( 0.271875, 0.0725, 0.29, 0.627451 )
+script = ExtResource( 1 )
+
+[node name="RootVBox" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 312.0
+margin_bottom = 176.0
+
+[node name="SubmitForm" type="HBoxContainer" parent="RootVBox"]
+margin_right = 304.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Name" type="LineEdit" parent="RootVBox/SubmitForm"]
+margin_right = 243.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+max_length = 15
+editable = false
+context_menu_enabled = false
+placeholder_text = "Your name:"
+
+[node name="SubmitButton" type="Button" parent="RootVBox/SubmitForm"]
+margin_left = 247.0
+margin_right = 304.0
+margin_bottom = 24.0
+text = "Submit"
+
+[node name="LeadersListWrapper" type="ScrollContainer" parent="RootVBox"]
+margin_top = 28.0
+margin_right = 304.0
+margin_bottom = 168.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="LeadersList" type="VBoxContainer" parent="RootVBox/LeadersListWrapper"]
+margin_right = 304.0
+size_flags_horizontal = 3
+
+[node name="SubmitHTTPRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[node name="GetHTTPRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/fade_in = SubResource( 2 )
+
+[connection signal="text_changed" from="RootVBox/SubmitForm/Name" to="." method="_on_Name_text_changed"]
+[connection signal="text_entered" from="RootVBox/SubmitForm/Name" to="." method="_on_Name_text_entered"]
+[connection signal="pressed" from="RootVBox/SubmitForm/SubmitButton" to="." method="_on_SubmitButton_pressed"]
+[connection signal="request_completed" from="SubmitHTTPRequest" to="." method="_on_SubmitHTTPRequest_request_completed"]
+[connection signal="request_completed" from="GetHTTPRequest" to="." method="_on_GetHTTPRequest_request_completed"]

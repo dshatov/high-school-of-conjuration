@@ -1,3 +1,10 @@
+/.idea/*
+!/.idea/codeStyle*
+!/.idea/inspectionProfiles
+*.ipr
+*.iws
+*.iml
+
 # Godot 4+ specific ignores
 .godot/
 
