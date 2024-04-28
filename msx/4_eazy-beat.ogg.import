@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/4_eazy-beat.ogg-2080c8a63f3a117fb5e3f0a0280a3bad.oggstr"
+
+[deps]
+
+source_file="res://msx/4_eazy-beat.ogg"
+dest_files=[ "res://.import/4_eazy-beat.ogg-2080c8a63f3a117fb5e3f0a0280a3bad.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

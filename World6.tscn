@@ -259,6 +259,7 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 [node name="World6" type="Node"]
 script = ExtResource( 6 )
 next_level_scene = ExtResource( 5 )
+is_hard = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://bg_cave.png" type="Texture" id=2]
+[ext_resource path="res://msx/2_hard-bass.ogg" type="AudioStream" id=3]
 [ext_resource path="res://TimeLabel.gd" type="Script" id=4]
+[ext_resource path="res://msx/1_hard-beat.ogg" type="AudioStream" id=5]
+[ext_resource path="res://msx/4_eazy-beat.ogg" type="AudioStream" id=6]
+[ext_resource path="res://msx/3_hard-choir.ogg" type="AudioStream" id=7]
+[ext_resource path="res://msx/5_eazy-piano.ogg" type="AudioStream" id=8]
+[ext_resource path="res://CrossFadePlayer.gd" type="Script" id=9]
 
 [node name="Game" type="Node"]
 
@@ -20,3 +26,35 @@ margin_right = 320.0
 margin_bottom = 14.0
 text = "00:00.00"
 script = ExtResource( 4 )
+
+[node name="BGM" type="Node" parent="."]
+
+[node name="HardBeatPlayer" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource( 5 )
+volume_db = -80.0
+autoplay = true
+script = ExtResource( 9 )
+
+[node name="HardBassPlayer" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource( 3 )
+volume_db = -80.0
+autoplay = true
+script = ExtResource( 9 )
+
+[node name="HardChoirPlayer" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource( 7 )
+volume_db = -80.0
+autoplay = true
+script = ExtResource( 9 )
+
+[node name="EasyBeatPlayer" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource( 6 )
+volume_db = -80.0
+autoplay = true
+script = ExtResource( 9 )
+
+[node name="EasyPianoPlayer" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource( 8 )
+volume_db = -80.0
+autoplay = true
+script = ExtResource( 9 )

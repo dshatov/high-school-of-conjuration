@@ -129,6 +129,7 @@ anims/run = SubResource( 12 )
 stream = ExtResource( 3 )
 
 [node name="RandomJump" parent="SFX" instance=ExtResource( 4 )]
+volume_db = -6.0
 streams = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
 [node name="RandomOpen" parent="SFX" instance=ExtResource( 4 )]

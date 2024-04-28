@@ -132,6 +132,7 @@ anims/run = SubResource( 11 )
 [node name="SFX" type="Node2D" parent="."]
 
 [node name="RandomJump" parent="SFX" instance=ExtResource( 19 )]
+volume_db = -6.0
 pitch_scale = 1.48
 max_distance = 150.0
 streams = [ ExtResource( 9 ), ExtResource( 16 ), ExtResource( 6 ), ExtResource( 10 ) ]
